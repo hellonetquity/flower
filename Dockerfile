@@ -2,7 +2,6 @@ FROM python:alpine
 
 # Get latest root certificates
 RUN apk add --no-cache ca-certificates && update-ca-certificates
-
 # Install the required packages
 RUN pip install --no-cache-dir redis flower
 
@@ -13,8 +12,8 @@ ENV PYTHONUNBUFFERED=1 PYTHONHASHSEED=random PYTHONDONTWRITEBYTECODE=1
 
 # Default port
 EXPOSE 5555
+ADD start_flower.sh .
 
 # Run as a non-root user by default, run as user with least privileges.
 USER nobody
 
-ENTRYPOINT ["flower"]
